@@ -104,4 +104,3 @@ export const updateNewPostTextActionCreator = (text) => ({type: UPDATE_NEW_POST_
 
 window.store = store;
 export default store;
-вв
