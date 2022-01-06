@@ -9,7 +9,11 @@ import App from './App';
 let renderEntireTree = (state) =>{
   ReactDOM.render(
     <React.StrictMode>
+<<<<<<< HEAD
       <App state={state} dispatch={store.dispatch.bind(store)} store={store} />
+=======
+      <App state={state} dispatch={store.dispatch.bind(store)} />
+>>>>>>> master
     </React.StrictMode>,
     document.getElementById('root')
   );

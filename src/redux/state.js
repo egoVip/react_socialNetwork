@@ -48,7 +48,11 @@ let store = {
         this._callSubscriber = observer;
     },
 
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> master
     dispatch(action) {
         if (action.type === ADD_POST) {
             let newPost = {
@@ -62,6 +66,7 @@ let store = {
         } else if (action.type === UPDATE_NEW_POST_TEXT) {
             this._state.profilePage.newPostText = action.newText;
             this._callSubscriber(this._state);
+<<<<<<< HEAD
         } else if (action.type === UPDATE_NEW_MESSAGE_BODY) {
             this._state.dialogsPage.newMessageBody = action.body;
             this._callSubscriber(this._state);
@@ -70,12 +75,18 @@ let store = {
             this._state.dialogsPage.newMessageBody = '';
             this._state.dialogsPage.messages.push({ id: 6, message: body });
             this._callSubscriber(this._state);
+=======
+        } else if(action.type === UPDATE_NEW_MESSAGE_BODY){
+            this._state.dialogsPage.newMessageBody = action.body;
+            this._callSubscriber(this._state);
+>>>>>>> master
         }
 
     }
 
 };
 
+<<<<<<< HEAD
 export const addPostActionCreator = () => ({ type: ADD_POST });       //сокращенный синтаксиси return {type: ADD_POST}
 
 export const updateNewPostTextActionCreator = (text) => ({ type: UPDATE_NEW_POST_TEXT, newText: text });
@@ -83,6 +94,13 @@ export const updateNewPostTextActionCreator = (text) => ({ type: UPDATE_NEW_POST
 export const updateNewMessageBodyCreator = (body) => ({ type: UPDATE_NEW_MESSAGE_BODY, body: body });
 
 export const sendMessageCreator = () => ({ type: SEND_MESSAGE });
+=======
+export const addPostActionCreator = () => ({type: ADD_POST});       //сокращенный синтаксиси return {type: ADD_POST}
+
+export const updateNewPostTextActionCreator = (text) => ({type: UPDATE_NEW_POST_TEXT, newText: text});
+
+
+>>>>>>> master
 
 window.store = store;
 export default store;

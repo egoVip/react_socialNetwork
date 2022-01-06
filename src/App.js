@@ -23,7 +23,11 @@ function App(props) {
                         {/* <Route path="/profile" element={<Profile />} /> */}
                         <Route path='/profile' element={<Profile profilePage={props.state.profilePage}
                          dispatch={props.dispatch}/>}/>
+<<<<<<< HEAD
                         <Route path="/dialogs/*" element={<Dialogs store={props.store} />} />
+=======
+                        <Route path="/dialogs/*" element={<Dialogs state={props.state.dialogsPage}/>} />
+>>>>>>> master
                         <Route path="/news" element={<News />} />
                         <Route path="/music" element={<Music />} />
                         <Route path="/setting" element={<Setting />} />
