@@ -1,97 +1,53 @@
-import React from 'react';
+import React from "react";
+import UserPhoto from '../../assets/img/user.png';
 import style from './Users.module.css';
-import * as axios from 'axios';
-import UserPhoto from '../../assets/img/user.png'
 
-class Users extends React.Component {
+let Users = (props) => {
 
-	componentDidMount() {
-		if (this.props.users.length === 0) {
-			axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
-				this.props.setUsers(response.data.items);
-				this.props.setTotalUsersCount(response.data.totalCount);
-			})
-		
-	}
-	}
-	onPageChanged (pageNumber) {
-		this.props.setCurrentPage(pageNumber);
-		// if (this.props.users.length === 0) {
-			axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
-				this.props.setUsers(response.data.items);
-			})
-	}
-
-	render() {
-		let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
+    
+		let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
 		let pages =[];
 		for(let i=1; i<=pagesCount; i++){
-			pages.push(i)
-		};
-		  
-		return <div>
-			<div className={style.pagesNumber}>
-				{pages.map(p => {
-					return <span className={this.props.currentPage === p && style.selectedPage}
-					onClick={()=>{this.onPageChanged(p)}}>{p}</span>
-				})}
-				
-			</div>
-			{
-				this.props.users.map(u => <div key={u.id}>
-					<span>
-						<div>
-							<img src={u.photos.small != null ? u.photos.small : UserPhoto} className={style.userPhoto} />
-						</div>
-						<div>
-							{u.followed
-								? <button onClick={() => { this.props.toggleFollow(u.id) }}>Unfollow</button>
-								: <button onClick={() => { this.props.toggleFollow(u.id) }}>Follow</button>}
-						</div>
-					</span>
-					<span>
-						<span>
-							<div> {u.name}</div>
-							<div>{u.status}</div>
-						</span>
-						<span>
-							<div>{'u.location.country'}</div>
-							<div>{'u.location.city'}</div>
-						</span>
-					</span>
-				</div>
-				)
-			}
+			pages.push(i)};
 
-		</div>
-	}
+    return (
+        <div>
+            <div className={style.pagesNumber}>
+                {pages.map(p => {
+                    return <span className={props.currentPage === p && style.selectedPage}
+                        onClick={(e) => { props.onPageChanged(p) }}>{p}</span>
+                })}
+
+            </div>
+            {
+                props.users.map(u => <div key={u.id}>
+                    <span>
+                        <div>
+                            <img src={u.photos.small != null ? u.photos.small : UserPhoto} className={style.userPhoto} />
+                        </div>
+                        <div>
+                            {u.followed
+                                ? <button onClick={() => { props.toggleFollow(u.id) }}>Unfollow</button>
+                                : <button onClick={() => { props.toggleFollow(u.id) }}>Follow</button>}
+                        </div>
+                    </span>
+                    <span>
+                        <span>
+                            <div> {u.name}</div>
+                            <div>{u.status}</div>
+                        </span>
+                        <span>
+                            <div>{'u.location.country'}</div>
+                            <div>{'u.location.city'}</div>
+                        </span>
+                    </span>
+                </div>
+                )
+            }
+
+        </div>
+    )
 }
 
-
 export default Users;
-
-// if (props.users.length === 0) {
-
-
-
-// 	props.setUsers([
-// 		{
-// 			id: 1, photoUrl: 'https://resizer.mail.ru/p/7a1e86df-9686-5098-963e-27304c6f1133/AAACY37OntEVxnf9OOUuLkcQpyEwVtb3AZgK14eU9OI6IljiYtBizDmEp-vG8UfPC3h-OB130PE-ba1mk1rY6S-3Zek.jpg',
-// 			followed: true, fullName: 'Dima', status: 'Boss', location: { city: 'Minsk', country: 'Belarus' }
-// 		},
-// 		{
-// 			id: 2, photoUrl: 'https://resizer.mail.ru/p/7a1e86df-9686-5098-963e-27304c6f1133/AAACY37OntEVxnf9OOUuLkcQpyEwVtb3AZgK14eU9OI6IljiYtBizDmEp-vG8UfPC3h-OB130PE-ba1mk1rY6S-3Zek.jpg',
-// 			followed: true, fullName: 'Lena', status: 'Boss', location: { city: 'Moscow', country: 'Russia' }
-// 		},
-// 		{
-// 			id: 3, photoUrl: 'https://resizer.mail.ru/p/7a1e86df-9686-5098-963e-27304c6f1133/AAACY37OntEVxnf9OOUuLkcQpyEwVtb3AZgK14eU9OI6IljiYtBizDmEp-vG8UfPC3h-OB130PE-ba1mk1rY6S-3Zek.jpg',
-// 			followed: false, fullName: 'Stepa', status: 'Boss', location: { city: 'Kiev', country: 'Ukrain' }
-// 		},
-// 		{
-// 			id: 4, photoUrl: 'https://resizer.mail.ru/p/7a1e86df-9686-5098-963e-27304c6f1133/AAACY37OntEVxnf9OOUuLkcQpyEwVtb3AZgK14eU9OI6IljiYtBizDmEp-vG8UfPC3h-OB130PE-ba1mk1rY6S-3Zek.jpg',
-// 			followed: false, fullName: 'Vova', status: 'Boss', location: { city: 'Berlin', country: 'Germany' }
-// 		},
-// 	]
-// 	)
-// }
