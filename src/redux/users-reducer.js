@@ -1,3 +1,5 @@
+import { usersAPI } from "../api/api";
+
 const TOGGLE_FOLLOW = 'TOGGLE_FOLLOW';
 const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
@@ -43,7 +45,7 @@ const usersReducer = (state = initialState, action) => {
             return {
                 ...state,
                 followingInProgress: action.isFetching
-                    ? [...state.followingInProgress,action.userId]
+                    ? [...state.followingInProgress, action.userId]
                     : state.followingInProgress.filter(id => id != action.userId)
             }
         }
@@ -58,5 +60,50 @@ export const setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, curren
 export const setTotalUsersCount = (totalUsersCount) => ({ type: SET_TOTAL_USERS_COUNT, count: totalUsersCount });
 export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching });
 export const togglefollowingInProgress = (isFetching, userId) => ({ type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId });
+
+export const getUsersThunkCreator = (currentPage, pageSize,) => {
+
+    return (dispatch) => {
+
+        dispatch(toggleIsFetching(true));
+        // dispatch(setCurrentPage(pageNumber));
+        usersAPI.getUsers(currentPage, pageSize)
+            .then((data) => {
+                dispatch(toggleIsFetching(false));
+                dispatch(setUsers(data.items));
+                dispatch(setTotalUsersCount(data.totalCount));
+            })
+    }
+};
+
+export const deleteUsersThunkCreator = (u) => {
+
+    return (dispatch) => {
+
+        dispatch(togglefollowingInProgress(true, u));
+        usersAPI.deleteUsers(u)
+            .then((data) => {
+                if (data.resultCode === 0) {
+                    dispatch(toggleFollow(u))
+                }
+                dispatch(togglefollowingInProgress(false, u));
+            });
+    }
+};
+
+export const postUsersThunkCreator = (u) => {
+
+    return (dispatch) => {
+
+        dispatch(togglefollowingInProgress(true, u));
+        usersAPI.postUsers(u)
+            .then((data) => {
+                if (data.resultCode === 0) {
+                    dispatch(toggleFollow(u))
+                }
+                dispatch(togglefollowingInProgress(false, u));
+            });
+    }
+};
 
 export default usersReducer;

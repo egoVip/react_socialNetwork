@@ -4,6 +4,7 @@ import UserPhoto from '../../assets/img/user.png';
 import style from './Users.module.css';
 import * as axios from 'axios';
 import { usersAPI } from "../../api/api";
+import {deleteUsersThunkCreator, postUsersThunkCreator} from './../../redux/users-reducer'
 
 let Users = (props) => {
 
@@ -36,26 +37,26 @@ let Users = (props) => {
                         <div>
                             {u.followed
                                 ? <button disabled={props.followingInProgress.some(id=>id===u.id)} onClick={() => {
-                                    
-                                    props.togglefollowingInProgress(true, u.id);
-                                    usersAPI.deleteUsers(u.id)
-                                        .then((data) => {
-                                            if (data.resultCode === 0) {
-                                                props.toggleFollow(u.id)
-                                            }
-                                            props.togglefollowingInProgress(false, u.id);
-                                        });
+                                    props.deleteUsersThunkCreator (u.id);
+                                    // props.togglefollowingInProgress(true, u.id);
+                                    // usersAPI.deleteUsers(u.id)
+                                    //     .then((data) => {
+                                    //         if (data.resultCode === 0) {
+                                    //             props.toggleFollow(u.id)
+                                    //         }
+                                    //         props.togglefollowingInProgress(false, u.id);
+                                    //     });
                                 }}>Unfollow</button>
                                 : <button disabled={props.followingInProgress.some(id=>id===u.id)} onClick={() => {
-                                   
-                                    props.togglefollowingInProgress(true, u.id);
-                                    usersAPI.postUsers(u.id)
-                                        .then((data) => {
-                                            if (data.resultCode === 0) {
-                                                props.toggleFollow(u.id)
-                                            }
-                                            props.togglefollowingInProgress(false, u.id);
-                                        });
+                                    props.postUsersThunkCreator (u.id);
+                                    // props.togglefollowingInProgress(true, u.id);
+                                    // usersAPI.postUsers(u.id)
+                                    //     .then((data) => {
+                                    //         if (data.resultCode === 0) {
+                                    //             props.toggleFollow(u.id)
+                                    //         }
+                                    //         props.togglefollowingInProgress(false, u.id);
+                                    //     });
 
                                 }}>Follow</button>}
                         </div>
