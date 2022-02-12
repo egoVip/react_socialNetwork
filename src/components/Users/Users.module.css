@@ -12,6 +12,6 @@
 }
 
 .loader {
-    width: 150px;
-    height: 150px;
+    max-width: 250px;
+    max-height: 250px;
 }

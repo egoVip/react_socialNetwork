@@ -6,7 +6,7 @@ const Navbar = (props) => {
   return (
     <nav className={style.nav}>
       <div className={style.item}>
-        <NavLink to="/profile" className={navData => navData.isActive ? style.active : style.item}>Profile</NavLink>
+        <NavLink to="/profile/21851" className={navData => navData.isActive ? style.active : style.item}>Profile</NavLink>
       </div>
       <div className={style.item}>
         <NavLink to="/dialogs" className={navData => navData.isActive ? style.active : style.item}>Message</NavLink>
