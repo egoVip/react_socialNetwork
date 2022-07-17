@@ -1,82 +1,25 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-import UserPhoto from '../../assets/img/user.png';
-import style from './Users.module.css';
-import * as axios from 'axios';
-import { usersAPI } from "../../api/api";
-import {deleteUsersThunkCreator, postUsersThunkCreator} from './../../redux/users-reducer'
+import Paginator from '../common/Paginator/Paginator';
+import User from "./User";
 
-let Users = (props) => {
+let Users = ({ currentPage, onPageChanged, totalUsersCount, pageSize, users, ...props }) => {
 
-
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-
-    let pages = [];
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
-    };
-
-    return (
+    return <div>
+        <Paginator currentPage={currentPage} onPageChanged={onPageChanged}
+            totalItemsCount={totalUsersCount} pageSize={pageSize} />
         <div>
-            <div className={style.pagesNumber}>
-                {pages.map(p => {
-                    return <span className={props.currentPage === p && style.selectedPage}
-                        onClick={(e) => { props.onPageChanged(p) }}>{p}</span>
-                })}
-
-            </div>
-            {
-                props.users.map(u => <div key={u.id}>
-                    <span>
-                        <div>
-                            <NavLink to={'/profile/' + u.id}>
-                                <img src={u.photos.small != null ? u.photos.small : UserPhoto} className={style.userPhoto} />
-                            </NavLink>
-
-                        </div>
-                        <div>
-                            {u.followed
-                                ? <button disabled={props.followingInProgress.some(id=>id===u.id)} onClick={() => {
-                                    props.deleteUsersThunkCreator (u.id);
-                                    // props.togglefollowingInProgress(true, u.id);
-                                    // usersAPI.deleteUsers(u.id)
-                                    //     .then((data) => {
-                                    //         if (data.resultCode === 0) {
-                                    //             props.toggleFollow(u.id)
-                                    //         }
-                                    //         props.togglefollowingInProgress(false, u.id);
-                                    //     });
-                                }}>Unfollow</button>
-                                : <button disabled={props.followingInProgress.some(id=>id===u.id)} onClick={() => {
-                                    props.postUsersThunkCreator (u.id);
-                                    // props.togglefollowingInProgress(true, u.id);
-                                    // usersAPI.postUsers(u.id)
-                                    //     .then((data) => {
-                                    //         if (data.resultCode === 0) {
-                                    //             props.toggleFollow(u.id)
-                                    //         }
-                                    //         props.togglefollowingInProgress(false, u.id);
-                                    //     });
-
-                                }}>Follow</button>}
-                        </div>
-                    </span>
-                    <span>
-                        <span>
-                            <div> {u.name}</div>
-                            <div>{u.status}</div>
-                        </span>
-                        <span>
-                            <div>{'u.location.country'}</div>
-                            <div>{'u.location.city'}</div>
-                        </span>
-                    </span>
-                </div>
-                )
+            {users.map(u => <User user={u}
+                followingInProgress={props.followingInProgress}
+                deleteUsersThunkCreator={props.deleteUsersThunkCreator}
+                postUsersThunkCreator={props.postUsersThunkCreator}
+                key={u.id} />
+            )
             }
-
         </div>
-    )
+
+    </div>
+
+
 }
 
 export default Users;

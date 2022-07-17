@@ -9,7 +9,7 @@ const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS';
 
 let initialState = {
     users: [],
-    pageSize: 50,
+    pageSize: 10,
     totalUsersCount: 50,
     currentPage: 1,
     isFetching: false,
@@ -63,46 +63,43 @@ export const togglefollowingInProgress = (isFetching, userId) => ({ type: TOGGLE
 
 export const getUsersThunkCreator = (currentPage, pageSize,) => {
 
-    return (dispatch) => {
+    return async (dispatch) => {
 
         dispatch(toggleIsFetching(true));
-        // dispatch(setCurrentPage(pageNumber));
-        usersAPI.getUsers(currentPage, pageSize)
-            .then((data) => {
-                dispatch(toggleIsFetching(false));
-                dispatch(setUsers(data.items));
-                dispatch(setTotalUsersCount(data.totalCount));
-            })
+        dispatch(setCurrentPage(currentPage));
+
+        let data = await usersAPI.getUsers(currentPage, pageSize);
+        dispatch(toggleIsFetching(false));
+        dispatch(setUsers(data.items));
+        dispatch(setTotalUsersCount(data.totalCount));
     }
 };
 
-export const deleteUsersThunkCreator = (u) => {
+export const deleteUsersThunkCreator = (userId) => {
 
-    return (dispatch) => {
+    return async (dispatch) => {
 
-        dispatch(togglefollowingInProgress(true, u));
-        usersAPI.deleteUsers(u)
-            .then((data) => {
-                if (data.resultCode === 0) {
-                    dispatch(toggleFollow(u))
-                }
-                dispatch(togglefollowingInProgress(false, u));
-            });
+        dispatch(togglefollowingInProgress(true, userId));
+        let data = await usersAPI.deleteUsers(userId);
+
+        if (data.resultCode === 0) {
+            dispatch(toggleFollow(userId))
+        }
+        dispatch(togglefollowingInProgress(false, userId));
     }
 };
 
-export const postUsersThunkCreator = (u) => {
+export const postUsersThunkCreator = (userId) => {
 
-    return (dispatch) => {
+    return async (dispatch) => {
 
-        dispatch(togglefollowingInProgress(true, u));
-        usersAPI.postUsers(u)
-            .then((data) => {
-                if (data.resultCode === 0) {
-                    dispatch(toggleFollow(u))
-                }
-                dispatch(togglefollowingInProgress(false, u));
-            });
+        dispatch(togglefollowingInProgress(true, userId));
+        let data = await usersAPI.postUsers(userId);
+
+        if (data.resultCode === 0) {
+            dispatch(toggleFollow(userId))
+        }
+        dispatch(togglefollowingInProgress(false, userId));
     }
 };
 
