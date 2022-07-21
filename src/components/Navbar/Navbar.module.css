@@ -1,13 +1,4 @@
-.nav {
-    grid-area: n;
-    background-color: pink;
-    padding: 20px;
-}
 
-.item {
-    color: white;
-    text-decoration: none;
-}
 
 .active {
     color: black;
@@ -17,4 +8,16 @@
 .friends {
     padding: 30px 0;
     text-align: center;
+}
+
+.crx {
+    display: block;
+    grid-area: n;
+    background-color: green;
+    padding: 20px;
+}
+
+.crx .item {
+    color: white;
+    text-decoration: none;
 }

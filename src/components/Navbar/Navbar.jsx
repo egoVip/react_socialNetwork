@@ -4,7 +4,7 @@ import style from './Navbar.module.css';
 
 const Navbar = (props) => {
   return (
-    <nav className={style.nav}>
+    <div className={style.crx}>
       <div className={style.item}>
         <NavLink to="/profile/21851" className={navData => navData.isActive ? style.active : style.item}>Profile</NavLink>
       </div>
@@ -23,7 +23,7 @@ const Navbar = (props) => {
       <div className={style.item}>
         <NavLink to="/setting" className={navData => navData.isActive ? style.active : style.item}>Settings</NavLink>
       </div>
-    </nav>
+    </div>
   )
 }
 

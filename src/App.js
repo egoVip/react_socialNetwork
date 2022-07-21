@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Music from './components/Music/Music';
@@ -26,7 +26,7 @@ class App extends Component {
             return <Preloader />
         }
 
-        return (<BrowserRouter>
+        return (<HashRouter>
             <div className="app-wrapper" >
                 <HeaderContainer />
                 <Navbar />
@@ -46,7 +46,7 @@ class App extends Component {
                     </Suspense>
                 </div>
             </div>
-        </BrowserRouter>)
+        </HashRouter>)
     }
 };
 
