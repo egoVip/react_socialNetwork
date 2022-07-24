@@ -1,41 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import style from './ProfileInfo.module.css';
 import Preloader from './../../common/preloader/Preloader';
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import UserPhoto from '../../../assets/img/user.png';
+import ProfileDataForm from "./ProfileDataForm";
 
 
 const ProfileInfo = (props) => {
-  // debugger
+  
+  let [editMode, setEditMode] = useState(false);
+
   if (!props.profile) {
     return <Preloader />
   }
 
-  const onMainphotoSelected =(e)=>{
-    if(e.target.files.length){
+  const onMainphotoSelected = (e) => {
+    if (e.target.files.length) {
       props.savePhoto(e.target.files[0])
     }
   }
+  const Contact = ({ contactTitle, contactValue }) => {
+    return <div className={style.contact}><b>{contactTitle}</b>: {contactValue}</div>
+  }
 
-  return  (
+  const ProfileData = ({profile, isOwner, goToEditMode}) => <div>
+    {isOwner && <div><button onClick={goToEditMode}>edit</button></div>}
+    <div><b>Name:</b> {profile.fullName}</div>
+    {/* <div><b>ID:</b> {props.profile.userId}</div> */}
+    <div><b>LookingForAJob:</b> {profile.lookingForAJob ? 'Yes' : 'No'}</div>
+    {profile.lookingForAJob && <div><b>My profissional skills</b> {profile.lookingForAJobDescription}</div>}
+    <div><b>About me:</b> {profile.aboutMe}</div>
+    <div><b>Contacts:</b> {Object.keys(profile.contacts).map(key => {
+      return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]} />;
+    })}</div>
+  </div>
+
+  
+  return (
     <div>
-     
+
       <div className={style.descriptionBlock}>
-        <img src={props.profile.photos.large || UserPhoto} alt=""/>
-        
-<br />
-        { props.isOwner && <input type={'file'} onChange={onMainphotoSelected}/>}
-        <div>Name: {props.profile.fullName}</div>
+        <img src={props.profile.photos.large || UserPhoto} alt="" />
+
+        <br />
+        {props.isOwner && <input type={'file'} onChange={onMainphotoSelected} />}
         <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} />
-        <div>id: {props.profile.userId}</div>
-        {/* <div>facebook: {props.profile.contacts.facebook}</div>
-        <div>website: {props.profile.contacts.website}</div>
-        <div>vk: {props.profile.contacts.vk}</div>
-        <div>twitter: {props.profile.contacts.twitter}</div>
-        <div>instagram: {props.profile.contacts.instagram}</div>
-        <div>youtube: {props.profile.contacts.youtube}</div>
-        <div>lookingForAJob: {props.profile.lookingForAJob}</div>
-        <div>lookingForAJobDescription: {props.profile.lookingForAJobDescription}</div> */}
+        {editMode ? <ProfileDataForm profile = {props.profile}/>
+         : <ProfileData goToEditMode = {()=>{setEditMode(true)}} isOwner = {props.isOwner} profile = {props.profile}/>}
+        
       </div>
     </div>
   )
