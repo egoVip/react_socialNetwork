@@ -7,7 +7,7 @@ import ProfileDataForm from "./ProfileDataForm";
 
 
 const ProfileInfo = (props) => {
-  
+
   let [editMode, setEditMode] = useState(false);
 
   if (!props.profile) {
@@ -19,11 +19,21 @@ const ProfileInfo = (props) => {
       props.savePhoto(e.target.files[0])
     }
   }
+
+  const onSubmit = (formData) => {
+    props.saveProfile(formData).then(
+      () => {
+        setEditMode(false);
+      }
+    )
+
+  }
+
   const Contact = ({ contactTitle, contactValue }) => {
     return <div className={style.contact}><b>{contactTitle}</b>: {contactValue}</div>
   }
 
-  const ProfileData = ({profile, isOwner, goToEditMode}) => <div>
+  const ProfileData = ({ profile, isOwner, goToEditMode }) => <div>
     {isOwner && <div><button onClick={goToEditMode}>edit</button></div>}
     <div><b>Name:</b> {profile.fullName}</div>
     {/* <div><b>ID:</b> {props.profile.userId}</div> */}
@@ -35,7 +45,7 @@ const ProfileInfo = (props) => {
     })}</div>
   </div>
 
-  
+
   return (
     <div>
 
@@ -45,9 +55,9 @@ const ProfileInfo = (props) => {
         <br />
         {props.isOwner && <input type={'file'} onChange={onMainphotoSelected} />}
         <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} />
-        {editMode ? <ProfileDataForm profile = {props.profile}/>
-         : <ProfileData goToEditMode = {()=>{setEditMode(true)}} isOwner = {props.isOwner} profile = {props.profile}/>}
-        
+        {editMode ? <ProfileDataForm initialValues={props.profile} profile={props.profile} onSubmit={onSubmit} />
+          : <ProfileData goToEditMode={() => { setEditMode(true) }} isOwner={props.isOwner} profile={props.profile} />}
+
       </div>
     </div>
   )
