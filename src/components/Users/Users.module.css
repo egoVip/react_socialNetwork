@@ -1,6 +1,7 @@
 .userPhoto {
     width: 150px;
     height: 150px;
+    padding-bottom: 2px;
 }
 
 .selectedPage {
@@ -14,4 +15,8 @@
 .loader {
     max-width: 250px;
     max-height: 250px;
+}
+
+.userItem {
+    padding: 15px;
 }

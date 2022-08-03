@@ -1,5 +1,13 @@
 .item {
-    color: cyan;
+    
+    padding: 10px 0px;
+
+
+}
+
+.item .post {
+    color:black;
+    padding-bottom: 10px;
 
 
 }
@@ -9,3 +17,17 @@
     height: 80px;
     border-radius: 60%;
 }
+
+.item .like {
+    display: inline;
+    margin: 20px 0px;
+}
+
+.item .likesCount {
+    display: inline;
+    margin: 0px 5px;
+}
+
+/* .item .dislike {
+    margin-right: 10px;
+} */

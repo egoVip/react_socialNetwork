@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Music from './components/Music/Music';
@@ -31,9 +31,9 @@ class App extends Component {
                 <HeaderContainer />
                 <Navbar />
                 <div className='app-wrapper-content'>
-                <Suspense fallback={<div>Loading...</div>}>
-                    <Routes>
-                        <Route path='/' element={<Welcome />} />
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <Routes>
+                            <Route path='/' element={<Welcome />} />
                             <Route path='/profile/:userId' element={<ProfileContainer />} />
                             <Route path="/dialogs/*" element={<DialogsContainer />} />
                             <Route path="/users" element={<UsersContainer />} />
@@ -41,12 +41,11 @@ class App extends Component {
                             <Route path="/news" element={<News />} />
                             <Route path="/music" element={<Music />} />
                             <Route path="/setting" element={<Setting />} />
-                   
-                    </Routes>
+                        </Routes>
                     </Suspense>
                 </div>
             </div>
-        </HashRouter>)
+        </HashRouter >)
     }
 };
 

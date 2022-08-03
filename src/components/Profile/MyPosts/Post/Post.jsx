@@ -1,23 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import style from './Post.module.css';
+import yellowUser from '../../../../assets/img/pngwing.com.png'
 
 
 const Post = (props) => {
+
+  let [likesCount, setLikesCount] = useState(0);
   return (
 
     <div className={style.item}>
 
-      <img src="https://www.planetaexcel.ru/upload/main/fc3/721.jpg.png" alt="" />
-     
-      <div className="post">
-        
-      {props.messageLike}
+      <img src={yellowUser} alt="" />
 
+      <div className={style.post}>
+        {props.messageLike}
       </div>
-      <div className="like">
-        <button>Like</button>
-        {props.likesCount}
-
+      <div className={style.like}>
+        <button onClick={() => setLikesCount(likesCount + 1)}>Like</button>
+      </div>
+      <div className={style.likesCount}></div>{likesCount}
+      <div className={style.dislike}>
+        {likesCount > 0 && <button onClick={() => setLikesCount(likesCount - 1)}>DisLike</button>}
       </div>
     </div>
 
@@ -25,3 +28,9 @@ const Post = (props) => {
 }
 
 export default Post;
+
+<iframe src="http://picsart.com/e/330722772036211?h=1&f=1&width=320&height=408&fl=0"
+      height="408"
+      width="320"
+      style="border: 0; overflow: hidden; "
+    ></iframe>

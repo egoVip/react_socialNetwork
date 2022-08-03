@@ -1,17 +1,23 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import style from './Header.module.css';
+import logo from '../../assets/img/Binance-Icon-Logo.wine.svg'
 
 const Header = (props) => {
     return (
         <header className={style.header}>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPrlfJpVxz0MDMknFE-dFJJw_KcmqNT_Ba0mMDyDONvrzgYPrRDTNtzoe88JqMs0qDUvY&usqp=CAU" alt="" />
+            <div className={style.header_wrapper}>
+                <img src={logo} alt="" />
 
-            <div className={style.loginBlock}>
-                {props.isAuth
-                    ? <div>{props.login} - <button onClick={props.logoutThunkCreator}>Logout</button></div>
-                    : <NavLink to={'/login'} >Login</NavLink>}
+                <div className={style.welcome}>Welcome to <span>Social Network</span> </div>
+
+                <div className={style.loginBlock}>
+                    {props.isAuth
+                        ? <div className={style.loginHeader}> <span>Stepan</span>   <button onClick={props.logoutThunkCreator}>Logout</button></div>
+                        : <NavLink to={'/login'} >Login</NavLink>}
+                </div>
             </div>
+
         </header>
     )
 }

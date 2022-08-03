@@ -1,12 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import UserPhoto from '../../assets/img/user.png';
+import UserPhoto from '../../assets/img/pngwing.com.png';
 import style from './Users.module.css';
 
 let User = ({ user, followingInProgress, deleteUsersThunkCreator, postUsersThunkCreator, ...props }) => {
 
     return (
-        <div>
+        <div className={style.userItem}>
             <span>
                 <div>
                     <NavLink to={'/profile/' + user.id}>
@@ -33,8 +33,8 @@ let User = ({ user, followingInProgress, deleteUsersThunkCreator, postUsersThunk
                     <div>{user.status}</div>
                 </span>
                 <span>
-                    <div>{'user.location.country'}</div>
-                    <div>{'user.location.city'}</div>
+                    {/* <div>{'user.location.country'}</div>
+                    <div>{'user.location.city'}</div> */}
                 </span>
             </span>
         </div>

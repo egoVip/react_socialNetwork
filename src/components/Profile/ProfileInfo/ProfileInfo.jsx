@@ -34,7 +34,7 @@ const ProfileInfo = (props) => {
   }
 
   const ProfileData = ({ profile, isOwner, goToEditMode }) => <div>
-    {isOwner && <div><button onClick={goToEditMode}>edit</button></div>}
+    {isOwner && <div><button onClick={goToEditMode}>Edit</button></div>}
     <div><b>Name:</b> {profile.fullName}</div>
     {/* <div><b>ID:</b> {props.profile.userId}</div> */}
     <div><b>LookingForAJob:</b> {profile.lookingForAJob ? 'Yes' : 'No'}</div>
@@ -53,7 +53,9 @@ const ProfileInfo = (props) => {
         <img src={props.profile.photos.large || UserPhoto} alt="" />
 
         <br />
-        {props.isOwner && <input type={'file'} onChange={onMainphotoSelected} />}
+        {props.isOwner && <input className={style.inputBlock} type={'file'} onChange={onMainphotoSelected} />}
+        <br />
+        <br />
         <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} />
         {editMode ? <ProfileDataForm initialValues={props.profile} profile={props.profile} onSubmit={onSubmit} />
           : <ProfileData goToEditMode={() => { setEditMode(true) }} isOwner={props.isOwner} profile={props.profile} />}
