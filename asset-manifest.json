@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/react_socialNetwork/static/css/main.9421a64b.css",
+    "main.css": "/react_socialNetwork/static/css/main.2fbba137.css",
     "main.js": "/react_socialNetwork/static/js/main.30e100df.js",
     "static/css/672.a8530f4b.chunk.css": "/react_socialNetwork/static/css/672.a8530f4b.chunk.css",
     "static/js/672.563bdd76.chunk.js": "/react_socialNetwork/static/js/672.563bdd76.chunk.js",
@@ -9,14 +9,14 @@
     "static/media/loading.svg": "/react_socialNetwork/static/media/loading.85b8644b79d7fc5d1b8a634d2027ac99.svg",
     "index.html": "/react_socialNetwork/index.html",
     "static/media/Binance-Icon-Logo.wine.svg": "/react_socialNetwork/static/media/Binance-Icon-Logo.wine.d6efeea1a583c6d3ecb1d23c55ce712f.svg",
-    "main.9421a64b.css.map": "/react_socialNetwork/static/css/main.9421a64b.css.map",
+    "main.2fbba137.css.map": "/react_socialNetwork/static/css/main.2fbba137.css.map",
     "main.30e100df.js.map": "/react_socialNetwork/static/js/main.30e100df.js.map",
     "672.a8530f4b.chunk.css.map": "/react_socialNetwork/static/css/672.a8530f4b.chunk.css.map",
     "672.563bdd76.chunk.js.map": "/react_socialNetwork/static/js/672.563bdd76.chunk.js.map",
     "787.cfd8f164.chunk.js.map": "/react_socialNetwork/static/js/787.cfd8f164.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9421a64b.css",
+    "static/css/main.2fbba137.css",
     "static/js/main.30e100df.js"
   ]
 }
